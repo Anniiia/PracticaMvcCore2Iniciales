@@ -1,0 +1,20 @@
+﻿@using PracticaMvcCore2.Models
+@model List<Genero>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+        Generos
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <a class="dropdown-item" asp-controller="Libros" asp-action="Index">Todos</a>
+        </li>
+
+        @foreach (Genero gene in Model)
+        {
+            <li>
+                <a class="dropdown-item" asp-controller="Libros" asp-action="LibrosGenero" asp-route-idgenero="@gene.IdGenero">@gene.Nombre</a>
+            </li>
+        }
+    </ul>
+<li/>

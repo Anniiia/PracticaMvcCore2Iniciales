@@ -1,0 +1,61 @@
+﻿@using PracticaMvcCore2.Models
+@{
+
+    List<Libro>libroslista = Context.Session.GetObject<List<Libro>>("CARRITO");
+}
+
+
+@{
+    ViewData["Title"] = "VerCarrito";
+}
+
+<h1>VerCarrito</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if (libroslista != null)
+
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    TITULO
+                </th>
+                <th>
+                    PORTADA
+                </th>
+                <th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var li in libroslista)
+            {
+                <tr>
+                    <td>
+                        @li.Titulo
+                    </td>
+                    <td>
+                        <img src="~/images/@Html.DisplayFor(modelItem => li.Portada)" style="height: 150px; width:100px" />
+
+                    </td>
+                    <td>
+                        <a asp-controller="Libros" asp-action="VerCarrito" asp-route-ideliminar="@li.IdLibro" class="btn btn-dark">Eliminar del carrito</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-controller="Libros" asp-action="FinalizarCompra" class="btn btn-dark">Realizar compra</a>
+
+}
+else
+{
+    
+   <h2>No hay libros en el carrito</h2>
+}
+
